@@ -14,17 +14,25 @@ class Form extends React.Component<IFormProps, IFormState> {
     };
   }
 
-  handleSubmit = async (e) {
+  handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      let token = await this.props.stripe.createToken({
+      let { token } = await this.props.stripe.createToken({
         name: this.state.name,
       });
-      console.log(token);
+      let amount = this.state.amount;
+      await fetch("/api/donate", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ token, amount }),
+      });
+      //redirect, clear inputs, thank you alert
     } catch (e) {
       throw e;
     }
-  }
+  };
 
   render() {
     return (
@@ -32,9 +40,7 @@ class Form extends React.Component<IFormProps, IFormState> {
         <form
           action=""
           className="form-group mt-3 border border-primary rounded shadow-1g p-3"
-          onSubmit={(e: React.ChangeEvent<HTMLFormElement>) =>
-            this.handleSubmit(e)
-          }
+          onSubmit={this.handleSubmit}
         >
           <label htmlFor="">Name</label>
           <input
