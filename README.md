@@ -1,4 +1,7 @@
-# Barebones React/TypeScript/Express/Sass Boilerplate
+# This project is a demo of a React/TypeScript/Express/Sass app with Stripe Integration from Covalence
+Based on the tutorials https://www.youtube.com/watch?v=dEahSdI7p7M, https://www.youtube.com/watch?v=rFmZtobVB1k
+
+## Barebones React/TypeScript/Express/Sass Boilerplate
 This project is a starting point for a TypeScript based React app that also has a local API server using express.
 
 There are 2 different Webpack configurations. One for the server and one for the client.
